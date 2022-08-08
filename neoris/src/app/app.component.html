@@ -1,0 +1,92 @@
+<div class="content">
+  <div class="label-1">Listado de Pokemon</div>
+  <table width="100%" class="content-table-1">
+    <tr>
+      <td>
+        <div class="input-icons">
+          <mat-icon class="icon">search</mat-icon>
+          <input class="input-field" type="text" [(ngModel)]="namesearch" (ngModelChange)="handleSearch($event)" placeholder="Buscar">
+        </div>
+      </td>
+      <td class="content-col-btn">
+        <button class="content-btn" (click)="handleNuevoPokemon()"> + Nuevo</button>
+      </td>
+    </tr>
+  </table>
+  <div class="content-table-data">
+    <table width="100%" class="content-table-2">
+      <tr>
+        <td *ngFor="let element of arrayTableHead" class="content-cell">
+          <div>{{element.text}}</div>
+        </td>
+      </tr>
+      <tr *ngFor="let element of arrayTableBody">
+        <td class="content-cell">
+          <div>{{element.name}}</div>
+        </td>
+        <td class="content-cell">
+          <div>
+            <img src="{{element.image}}" alt="Girl in a jacket" width="70" height="70">
+          </div>
+        </td>
+        <td class="content-cell">
+          <div>{{element.attack}}</div>
+        </td>
+        <td class="content-cell">
+          <div>{{element.defense}}</div>
+        </td>
+        <td class="content-cell">
+          <div>
+            <mat-icon class="icon-acciones" (click)="handleEditarPokemon(element)">edit</mat-icon>
+            <mat-icon class="icon-acciones" (click)="handleEliminarPokemon(element)">delete</mat-icon>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="content-nuevo-pokemon" *ngIf="showNuevoPokemon">
+    <div class="label-2">Nuevo Pokemon</div>
+    <div>
+      <table width="100%">
+        <tr>
+          <td>
+            <div class="content-inputs-nuevoP">
+              <span class="label-span-2">Nombre:</span> <input type="text" [(ngModel)]="objNewPokemon.name" (ngModelChange)="handleOnchange($event)" placeholder="Ingresa un nombre"
+                class="input-new">
+            </div>
+          </td>
+          <td>
+            <div class="content-slider content-inputs-nuevoP">
+              <span class="label-span-1">Ataque:</span> 0 <input class="input-slider" type="range" [(ngModel)]="objNewPokemon.attack" min="0" max="100"
+                value="0"> {{objNewPokemon.attack}}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="content-inputs-nuevoP">
+              <span class="label-span-2">Imágen:</span> <input type="text" [(ngModel)]="objNewPokemon.image" placeholder="Ingresa una url"
+                class="input-new">
+            </div>
+          </td>
+          <td>
+            <div class="content-slider content-inputs-nuevoP">
+              <span class="label-span-1">Defensa:</span> 0 <input class="input-slider" type="range" [(ngModel)]="objNewPokemon.defense" min="0" max="100"
+                value="0"> {{objNewPokemon.defense}}
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content-buttons">
+      <button [ngClass]="{'content-btn-disabled': disableBtnSave, 'content-btn' : !disableBtnSave }" style="display: flex; margin: auto 2% auto auto;" (click)="handleGuardar()" [disabled]="disableBtnSave">
+        <mat-icon>save</mat-icon>
+        <div class="label-btn">Guardar</div>
+      </button>
+      <button class="content-btn" style="display: flex; margin: auto auto auto 2%;" (click)="handleCancelar()">
+        <mat-icon>close</mat-icon>
+        <div class="label-btn">Cancelar</div>
+      </button>
+    </div>
+  </div>
+</div>
